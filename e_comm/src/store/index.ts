@@ -15,7 +15,6 @@ const store = createStore({
     mutations:{}
 })
 
-
 export interface UserLogin {
     first_name: string,
     last_name:string,
