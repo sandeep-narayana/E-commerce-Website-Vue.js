@@ -5,24 +5,15 @@
     <el-form style="max-width: 460px" label-position="top">
       <!-- First Name -->
       <el-form-item label="First Name">
-        <el-input
-          v-model="firstName"
-          placeholder="Enter Your First Name"
-        />
+        <el-input v-model="firstName" placeholder="Enter Your First Name" />
       </el-form-item>
       <!-- Last Name -->
       <el-form-item label="Last Name">
-        <el-input
-          v-model="lastName"
-          placeholder="Enter Your Last Name"
-        />
+        <el-input v-model="lastName" placeholder="Enter Your Last Name" />
       </el-form-item>
       <!-- Email Id -->
       <el-form-item label="Email">
-        <el-input
-          v-model="email"
-          placeholder="Enter Your email"
-        />
+        <el-input v-model="email" placeholder="Enter Your email" />
       </el-form-item>
       <!-- Password -->
       <el-form-item label="Password">
@@ -41,8 +32,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'; // Use defineComponent to define the component
-import store from '@/store'; // Update the path to your store
+import { defineComponent } from "vue"; // Use defineComponent to define the component
+import store from "@/store"; // Update the path to your store
+import sweetAlert from "sweetalert2";
 
 export default defineComponent({
   name: "SignUpComponent",
@@ -51,20 +43,28 @@ export default defineComponent({
       firstName: null as string | null,
       lastName: null as string | null,
       email: null as string | null,
-      password: null as string | null,  
+      password: null as string | null,
     };
   },
   methods: {
     async submitForm() {
       try {
         const param = {
-          first_name: this.firstName, 
+          first_name: this.firstName,
           last_name: this.lastName,
           email: this.email,
           password: this.password,
         };
-        var res = await store.dispatch("registerUser", param); 
-        console.log(res); 
+        var res = await store.dispatch("registerUser", param);
+        if (res.status === 201) {
+          sweetAlert.fire({
+            icon: "success",
+            title: "Sign-Up Successful",
+            text: "Please login using the credentials",
+          });
+          // redirect to Login page
+          this.$router.push({ name: "Login" });
+        }
       } catch (error) {
         console.log(error);
       }
@@ -73,8 +73,7 @@ export default defineComponent({
 });
 </script>
 
-
-<style >
+<style>
 .container {
   max-width: 50vh; /* Adjust the maximum width as needed */
   margin: auto; /* Center the container horizontally */

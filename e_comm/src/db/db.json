@@ -3,7 +3,7 @@
     {
       "firstName": "sandeep",
       "lastName": "rawat",
-      "email": "sandeeprawat313@gmail.com",
+      "email": "sandeeprawat@gmail.com",
       "password": "12345",
       "id": 1
     },
@@ -13,6 +13,20 @@
       "email": "ram@gmail.com",
       "password": "12345",
       "id": 2
+    },
+    {
+      "first_name": "jaja",
+      "last_name": "as",
+      "email": "asdf",
+      "password": "afadgadgs",
+      "id": 3
+    },
+    {
+      "first_name": "adf",
+      "last_name": "adf",
+      "email": "adf",
+      "password": "adfg",
+      "id": 4
     }
   ]
 }
