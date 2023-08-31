@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "firstName": "sandeep",
+      "lastName": "rawat",
+      "email": "sandeeprawat313@gmail.com",
+      "password": "12345",
+      "id": 1
+    },
+    {
+      "first_name": "rawat",
+      "last_name": "raghu",
+      "email": "ram@gmail.com",
+      "password": "12345",
+      "id": 2
+    }
+  ]
+}
