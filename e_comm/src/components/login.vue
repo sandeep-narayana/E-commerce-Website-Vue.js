@@ -49,7 +49,6 @@ export default defineComponent({
             icon: "success",
             title: "Sign-In Successful",
           });
-
           this.$router.push({ name: "Home" });
         } else {
           sweetAlert.fire({
