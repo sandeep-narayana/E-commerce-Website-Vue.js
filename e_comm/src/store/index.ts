@@ -8,6 +8,7 @@ const store = createStore({
     categories: [] as categories[],
     products: [] as products[],
   },
+  
   mutations: {
     setUser(state, user) {
       state.user = user;
@@ -19,6 +20,7 @@ const store = createStore({
       state.products = products;
     },
   },
+
   actions: {
     // User Registration
     async registerUser(context, data: userSignUp) {
@@ -54,6 +56,7 @@ const store = createStore({
       context.commit("setProducts", products);
     },
   },
+
   getters: {
     currentUser: (state) => state.user,
     // returns true if there is a user object in the state

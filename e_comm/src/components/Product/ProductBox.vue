@@ -4,15 +4,16 @@
       <img class="card-img-top" :src="product.image" alt="" />
     </div>
     <div class="card-body">
-      <!-- <router-link :to="{ name: 'ProductDetails', params: { id: product.id } }">
+      <router-link :to="{ name: 'ProductDetails', params: { id: product.id } }">
         <h5 class="card-title">{{ product.name }}</h5>
-      </router-link> -->
+      </router-link>
 
       <p class="card-text">{{ product.description }}</p>
+      
     </div>
-    <div class="card-footer" v-if="$route.name === 'ProductComponent'">
+    <!-- <div class="card-footer" v-if="$route.name === 'ProductComponent'">
       <a href="#" class="btn btn-primary stretched-link">Learn More</a>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
