@@ -4,12 +4,12 @@ import Home from "./components/Home.vue";
 import Dashboard from "./components/Dashboard.vue";
 import Login from "./components/Login.vue";
 import store from "./store";
-import CategoriesComponent from "./components/Category/Categories.vue"
-import CategoryBox from "./components/Category/Categorybox.vue"
+import CategoriesComponent from "./components/Category/Categories.vue";
+import CategoryBox from "./components/Category/Categorybox.vue";
+import ProductComponent from "./components/Product/Product.vue";
 
 // because of typescript
-import { NavigationGuardNext, RouteLocationNormalized } from 'vue-router';
-
+import { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
 
 const routes = [
   {
@@ -21,20 +21,27 @@ const routes = [
     name: "SignUpComponent",
     component: SignUpComponent,
     path: "/sign-up",
-    beforeEnter:(to:RouteLocationNormalized, from:RouteLocationNormalized,next:NavigationGuardNext) =>{
-        if(store.getters.isLoggedIn){
-            next({name:'Home'})
-        }else{
-            next();
-        }
-    }
-
+    beforeEnter: (
+      to: RouteLocationNormalized,
+      from: RouteLocationNormalized,
+      next: NavigationGuardNext
+    ) => {
+      if (store.getters.isLoggedIn) {
+        next({ name: "Home" });
+      } else {
+        next();
+      }
+    },
   },
   {
     name: "Login",
     component: Login,
     path: "/login",
-    beforeEnter: (to:RouteLocationNormalized, from:RouteLocationNormalized, next:NavigationGuardNext) => {
+    beforeEnter: (
+      to: RouteLocationNormalized,
+      from: RouteLocationNormalized,
+      next: NavigationGuardNext
+    ) => {
       // Check if the user is authenticated
       if (store.getters.isLoggedIn) {
         // If authenticated, redirect to the home page
@@ -57,13 +64,18 @@ const routes = [
     component: CategoriesComponent,
     path: "/categories",
   },
-    // categories
-    {
-      name: "CategoryBox",
-      component: CategoryBox,
-      path: "/category-box",
-    },
-
+  // categories
+  {
+    name: "CategoryBox",
+    component: CategoryBox,
+    path: "/category-box",
+  },
+  // categories
+  {
+    name: "ProductComponent",
+    component: ProductComponent,
+    path: "/products",
+  },
 ];
 
 const router = createRouter({
