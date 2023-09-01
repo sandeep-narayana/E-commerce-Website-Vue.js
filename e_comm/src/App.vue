@@ -4,10 +4,17 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import store from "@/store"
 
 export default defineComponent({
   name: "App",
   components: {},
+  async mounted(){
+    // load all categories 
+    await store.dispatch('getAllCategories');
+    // load all products
+    await store.dispatch('getAllProducts')
+  }
 });
 </script>
 

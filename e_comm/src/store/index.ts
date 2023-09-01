@@ -5,20 +5,28 @@ const store = createStore({
   state: {
     test: "Hello i am test ",
     user: null as object | null, // Initialize user as null
-    //user: "Sandeep",
-    category: [] as Array<any>,
+    categories: [] as categories[],
+    products: [] as products[],
   },
   mutations: {
     setUser(state, user) {
       state.user = user;
     },
+    setCategories(state, categories) {
+      state.categories = categories;
+    },
+    setProducts(state, products) {
+      state.products = products;
+    },
   },
   actions: {
+    // User Registration
     async registerUser(context, data: userSignUp) {
       const res = await axios.post(`http://localhost:3000/users`, data);
       return res;
     },
 
+    // User Login
     async userLogin(context, data: UserLogin) {
       // Provide the correct AxiosRequestConfig
       const config: AxiosRequestConfig = {
@@ -28,11 +36,30 @@ const store = createStore({
       context.commit("setUser", res.data);
       return res;
     },
+
+    // get All Categories
+    async getAllCategories(context) {
+      const res = await axios.get(`http://localhost:3000/categories`);
+      context.commit("setCategories", res.data);
+    },
+
+    // get All products
+    async getAllProducts(context) {
+      const res = await axios.get(`http://localhost:3000/categories`);
+      // Collect all products from categories
+      const categories = res.data;
+      const products = categories
+        .map((category: categories) => category.products)
+        .flat();
+      context.commit("setProducts", products);
+    },
   },
   getters: {
     currentUser: (state) => state.user,
     // returns true if there is a user object in the state
     isLoggedIn: (state) => !!state.user,
+    allCategories: (state) => state.categories,
+    allproducts: (state) => state.products,
   },
 });
 
@@ -47,4 +74,21 @@ export interface UserLogin {
   email: string;
   password: string;
 }
+
+export interface categories {
+  name: string;
+  description: string;
+  image: string;
+  id: number;
+  products: products[];
+}
+
+export interface products {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+  price: number;
+}
+
 export default store;
