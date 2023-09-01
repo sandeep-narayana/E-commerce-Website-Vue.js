@@ -8,10 +8,12 @@ const store = createStore({
     categories: [] as categories[],
     products: [] as products[],
   },
-  
+
   mutations: {
     setUser(state, user) {
       state.user = user;
+      // Save user data to localStorage
+      localStorage.setItem("user", JSON.stringify(user));
     },
     setCategories(state, categories) {
       state.categories = categories;
@@ -65,6 +67,12 @@ const store = createStore({
     allproducts: (state) => state.products,
   },
 });
+
+// Initialize the user data from localStorage during store creation
+const savedUser = localStorage.getItem("user");
+if (savedUser) {
+  store.commit("setUser", JSON.parse(savedUser));
+}
 
 export interface userSignUp {
   first_name: string;

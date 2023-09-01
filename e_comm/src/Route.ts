@@ -19,7 +19,7 @@ const routes = [
     component: Home,
   },
   {
-    name: "SignUpComponent",
+    name: "SignUp",
     component: SignUpComponent,
     path: "/sign-up",
     beforeEnter: (
