@@ -8,6 +8,7 @@ import CategoriesComponent from "./components/Category/Categories.vue";
 import CategoryBox from "./components/Category/Categorybox.vue";
 import ProductComponent from "./components/Product/Product.vue";
 import ProductDetails from "./components/Product/ProductDetails.vue";
+import About from "./components/About.vue"
 
 // because of typescript
 import { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
@@ -82,6 +83,11 @@ const routes = [
     name: "ProductDetails",
     component: ProductDetails,
     path: "/products/:id",
+  },
+  {
+    name: "About",
+    component: About,
+    path: "/about",
   },
 ];
 
