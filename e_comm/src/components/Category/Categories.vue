@@ -22,7 +22,7 @@
 <script>
 import { defineComponent } from "vue";
 import { mapGetters } from "vuex";
-import Categorybox from "./Categorybox.vue"
+import Categorybox from "./Categorybox.vue";
 
 export default defineComponent({
   name: "CategoriesComponent",
@@ -33,8 +33,8 @@ export default defineComponent({
     // Access and print the data from the allCategories getter
     console.log(this.allCategories);
   },
-  components:{
-    Categorybox
-  }
+  components: {
+    Categorybox,
+  },
 });
 </script>
