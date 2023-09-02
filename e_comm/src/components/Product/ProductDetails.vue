@@ -33,31 +33,30 @@
   </div>
 </template>
 
-<script lang="ts">
-import { mapGetters, mapState } from "vuex";
+<script>
+import { mapGetters } from "vuex";
 import store, { categories, products } from "@/store";
 
 export default {
   name: "ProductDetails",
   data() {
     return {
-      displayProduct: null as products | null,
-      category: {} as categories | null,
-      id: 0, // Initialize id with a default value
+      displayProduct: {},
+      category: {},
     };
   },
 
   computed: {
-    ...mapGetters(["allproducts", "allCategories"]),
+    ...mapGetters({
+      allproducts: "allproducts", // Replace with your actual getter name
+      allCategories: "allCategories", // Replace with your actual getter name
+    }),
   },
 
   async mounted() {
     //call the data on mount as computed is not working on refresh
     await store.dispatch("getAllCategories");
     await store.dispatch("getAllProducts");
-
-    this.id = parseInt(this.$route.params.id.toString());
-    console.log(typeof(this.id));
     await this.loadProductData();
   },
 
@@ -65,14 +64,16 @@ export default {
     async loadProductData() {
       if (this.allproducts) {
         this.displayProduct = this.allproducts.find(
-          (product: products) => product.id === this.id
+          (product) =>
+            product.id === parseInt(this.$route.params.id.toString())
         );
       }
 
       // Find the category that contains the displayProduct
       for (const cat of this.allCategories) {
         const foundProduct = cat.products.find(
-          (product: products) => product.id === this.id
+          (product) =>
+            product.id === parseInt(this.$route.params.id.toString())
         );
         if (foundProduct) {
           this.category = cat;
