@@ -15,11 +15,11 @@
         <ul class="navbar-nav mr-auto">
           <!-- Home -->
           <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
+            <router-link class="nav-link" :to="{ name: 'Home' }">Home</router-link>
           </li>
           <!-- About -->
           <li class="nav-item">
-            <a class="nav-link" href="/about">About</a>
+            <router-link class="nav-link" :to="{ name: 'About' }">About</router-link>
           </li>
           <!-- Account Dropdown -->
           <li class="nav-item dropdown" v-if="loggedInUser">
@@ -30,7 +30,7 @@
               role="button"
               @click="toggleDropdown"
             >
-              {{ loggedInUser.firstName }} {{ loggedInUser.lastName }}
+              {{ loggedInUser[0].firstName}} {{ loggedInUser[0].LastName}}
             </a>
             <div
               class="dropdown-menu"
@@ -38,10 +38,10 @@
               :class="{ show: isDropdownOpen }"
             >
               <a class="dropdown-item" href="#" @click="handleLogout">Logout</a>
-              <router-link :to="{ name: `WishList` }" class="dropdown-item">
+              <router-link :to="{ name: 'Home' }" class="dropdown-item">
                 WishList
               </router-link>
-              <router-link :to="{ name: `Cart` }" class="dropdown-item">
+              <router-link :to="{ name: 'Home' }" class="dropdown-item">
                 Cart
               </router-link>
             </div>
@@ -74,18 +74,12 @@
                 >Admin</a
               >
               <div class="dropdown-divider"></div>
-              <a
-                class="dropdown-item"
-                href=""
-                @click="handleOptionClick('Login')"
-                >Login</a
-              >
-              <a
-                class="dropdown-item"
-                href=""
-                @click="handleOptionClick('Signup')"
-                >Signup</a
-              >
+              <router-link :to="{ name: 'Login' }" class="dropdown-item">
+                Login
+              </router-link>
+              <router-link :to="{ name: 'SignUp' }" class="dropdown-item">
+                Signup
+              </router-link>
             </div>
           </li>
         </ul>
@@ -95,19 +89,19 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "NavbarComponent",
-  props: ["user"],
   data() {
     return {
       isDropdownOpen: false,
-      loggedInUser: null,
     };
   },
-  watch: {
-    user(newUserData) {
-      // Update loggedInUser when the user prop changes
-      this.loggedInUser = newUserData;
+  computed: {
+    ...mapGetters(["currentUser"]), // Map the currentUser getter from Vuex
+    loggedInUser() {
+      return this.currentUser; // Use currentUser from Vuex
     },
   },
   methods: {
@@ -116,15 +110,15 @@ export default {
     },
     handleOptionClick(option) {
       if (option === "Signup") {
-        this.$router.push({name:'SignUp'});
+        this.$router.push({ name: "SignUp" });
       } else if (option === "Login") {
-        this.$router.push({name:'Login'});
+        this.$router.push({ name: "Login" });
       }
     },
     handleLogout() {
       // Clear user information from localStorage and refresh the page
       localStorage.removeItem("User-Info");
-      this.loggedInUser = null;
+      this.$store.commit("setUser", null); // Update the Vuex store
       this.$router.push({ name: "Home" }); // Refresh the page
     },
   },

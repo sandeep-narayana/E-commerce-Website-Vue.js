@@ -1,17 +1,6 @@
 <template>
   <div id="Home">
     <div id="backgroud-div" class="page-holder bg-cover">
-      <div class="container py-5">
-        <header class="text-left text-white py-5">
-          <h3 class="mb-4 rounded" id="heading">
-            <a href="#start-shopping" class="bg-white px-2 py-2 rounded"
-              >Start shopping</a
-            >
-          </h3>
-          <p class="lead mb-0 bg-dark p-1 rounded">Demo Ecommerce</p>
-        </header>
-      </div>
-      <hr />
     </div>
 
     <!-- Display loading indicator when data is loading -->
