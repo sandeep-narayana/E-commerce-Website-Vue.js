@@ -14,8 +14,13 @@
       <hr />
     </div>
 
-    <!-- Display Top Category  and products-->
-    <div class="container">
+    <!-- Display loading indicator when data is loading -->
+    <div v-if="isLoading" class="text-center">
+      <p>Loading...</p>
+    </div>
+
+    <!-- Display Top Category and products when data is loaded -->
+    <div v-else class="container">
       <div class="row">
         <div class="col-12 text-center">
           <h2 class="pt-3">Top Category</h2>
@@ -24,11 +29,11 @@
       <!-- // show Category cards -->
       <div class="row">
         <div
-          v-for="index in this.categorySize"
+          v-for="index in categorySize"
           :key="index"
           class="col-md-6 col-xl-4 col-12 pt-3 justify-content-around d-flex"
         >
-          <Categorybox :categoryData="categoreis[index]" />
+          <Categorybox :categoryData="categories[index]" />
         </div>
       </div>
 
@@ -50,35 +55,58 @@
     </div>
   </div>
 </template>
+
 <script>
+import { mapGetters } from "vuex";
 import Categorybox from "./Category/Categorybox.vue";
 import ProductBox from "./Product/ProductBox.vue";
-import {mapGetters} from "vuex" 
+
 export default {
   name: "HomeComponent",
   data() {
     return {
       categorySize: 0,
       productSize: 0,
+      isLoading: true, // Loading state
     };
-  },
-  created() {
-    this.categorySize = Math.min(6, this.categoreis.length);
-    this.productSize = Math.min(8, this.products.length);
   },
   components: {
     Categorybox,
     ProductBox,
   },
-  // props: ["categoreis", "products"],
   computed: {
     ...mapGetters({
-      products: "allproducts", // Replace with your actual getter name
-      categoreis: "allCategories", // Replace with your actual getter name
+      categories: "allCategories",
+      products: "allproducts",
     }),
+  },
+  beforeRouteEnter(to, from, next) {
+    // Fetch data before entering the route
+    next((vm) => {
+      vm.fetchData(); // Call your data fetching method
+    });
+  },
+  beforeRouteUpdate(to, from, next) {
+    // Fetch data when the route is updated (e.g., navigating between products)
+    this.fetchData();
+    next();
+  },
+  methods: {
+    async fetchData() {
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch("getAllCategories");
+        await this.$store.dispatch("getAllProducts");
+        this.categorySize = Math.min(6, this.categories.length);
+        this.productSize = Math.min(8, this.products.length);
+      } finally {
+        this.isLoading = false;
+      }
+    },
   },
 };
 </script>
+
 <style>
 .page-holder {
   min-height: 100vh;
