@@ -249,17 +249,10 @@
           "price": 1800
         },
         {
-          "id": 120,
-          "name": "Dining Tables",
-          "description": "Host gatherings with elegant dining tables.",
-          "image": "https://www.thepengu.com/cdn/shop/products/WhiteExtendableTable8SeaterView2.png?v=1629708908&width=1200",
-          "price": 1800
-        },
-        {
-          "id": 120,
-          "name": "Dining Tables",
-          "description": "Host gatherings with elegant dining tables.",
-          "image": "https://www.thepengu.com/cdn/shop/products/WhiteExtendableTable8SeaterView2.png?v=1629708908&width=1200",
+          "id": 122,
+          "name": "Skincare",
+          "description": "Achieve healthy and radiant skin with our skincare products.",
+          "image": "https://example.com/skincare.jpg",
           "price": 1800
         },
         {
