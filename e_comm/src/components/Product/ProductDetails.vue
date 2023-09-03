@@ -28,6 +28,18 @@
             <li>Lorem ipsum dolor sit amet consectetur adipisicing</li>
           </ul>
         </div>
+              <!-- buttons for wishlist -->
+      <div
+        class="card-footer d-flex justify-content-between"
+        v-if="$route.name === 'ProductDetails'"
+      >
+        <button class="btn btn-primary" v-on:click="AddToCart()">
+          Add to cart
+        </button>
+        <button class="btn btn-danger" v-on:click="DeleteProductFromWishList()">
+          Remove
+        </button>
+      </div>
       </div>
     </div>
   </div>
@@ -64,22 +76,26 @@ export default {
     async loadProductData() {
       if (this.allproducts) {
         this.displayProduct = this.allproducts.find(
-          (product) =>
-            product.id === parseInt(this.$route.params.id.toString())
+          (product) => product.id === parseInt(this.$route.params.id.toString())
         );
       }
 
       // Find the category that contains the displayProduct
       for (const cat of this.allCategories) {
         const foundProduct = cat.products.find(
-          (product) =>
-            product.id === parseInt(this.$route.params.id.toString())
+          (product) => product.id === parseInt(this.$route.params.id.toString())
         );
         if (foundProduct) {
           this.category = cat;
           break; // Stop searching once the category is found
         }
       }
+    },
+    AddToCart() {
+      console.log("Added");
+    },
+    DeleteProductFromWishList() {
+      console.log("removed");
     },
   },
 };

@@ -41,7 +41,7 @@
               <router-link :to="{ name: 'Home' }" class="dropdown-item">
                 WishList
               </router-link>
-              <router-link :to="{ name: 'Home' }" class="dropdown-item">
+              <router-link :to="{ name: 'CartComponet' }" class="dropdown-item">
                 Cart
               </router-link>
             </div>

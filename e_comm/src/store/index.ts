@@ -20,7 +20,7 @@ const store = createStore({
     },
     setProducts(state, products) {
       state.products = products;
-    },
+    }
   },
 
   actions: {

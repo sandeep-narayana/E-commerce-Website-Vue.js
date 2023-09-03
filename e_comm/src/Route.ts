@@ -10,6 +10,7 @@ import ProductComponent from "./components/Product/Product.vue";
 import ProductDetails from "./components/Product/ProductDetails.vue";
 import About from "./components/About.vue";
 import DisplayProducts from "./components/Category/DisplayAllProducts.vue"
+import CartComponet from "./components/Cart.vue"
 
 // because of typescript
 import { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
@@ -96,6 +97,13 @@ const routes = [
     component: DisplayProducts,
     path: "/category/show/:id",
   },
+  
+  {
+    name: "CartComponet",
+    component: CartComponet,
+    path: "/cart",
+  },
+
 ];
 
 const router = createRouter({

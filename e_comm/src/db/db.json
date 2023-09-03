@@ -274,6 +274,10 @@
           "price": 1800
         }
       ],
+      "firstName": "admin",
+      "lastName": "asmin",
+      "email": "admin@gmail.com",
+      "password": "admin",
       "id": 1
     },
     {
