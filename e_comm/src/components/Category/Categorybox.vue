@@ -4,11 +4,11 @@
       <img class="card-img-top" :src="categoryData.image" alt="" />
     </div>
     <div class="card-body">
-      <!-- <router-link
+      <router-link
         :to="{ name: 'DisplayProducts', params: { id: categoryData.id } }"
       >
         <h5 class="card-title">{{ categoryData.name }}</h5>
-      </router-link> -->
+      </router-link>
 
       <p class="card-text">{{ categoryData.description }}</p>
     </div>
