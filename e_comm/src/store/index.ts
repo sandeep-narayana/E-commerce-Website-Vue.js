@@ -57,6 +57,42 @@ const store = createStore({
         .flat();
       context.commit("setProducts", products);
     },
+
+    // Add a product to the user's cart
+    async addToCart(context, product) {
+      if (context.getters.isLoggedIn) {
+        // Get the user
+        const currentUser = context.getters.currentUser;
+
+        // Check if the user has a cart (assuming it's an array)
+        if (!Array.isArray(currentUser.cart)) {
+          currentUser.cart = [];
+        }
+
+        // Add the product to the user's cart
+        currentUser.cart.push(product);
+
+        // Update the user's data in the state
+        context.commit("setUser", currentUser);
+
+        // Update the user's cart on the server
+        try {
+          const userId = currentUser[0].id; // Adjust this based on your user object structure
+          const updatedCart = currentUser.cart;
+
+          //Make a PUT request to update the user's cart on the server
+          await axios.put(`http://localhost:3000/users/${userId}`, {
+            cart: updatedCart,
+          });
+
+          console.log("Product added to cart and cart updated on the server.");
+        } catch (error) {
+          console.error("Error updating the cart on the server:", error);
+        }
+      } else {
+        console.error("User is not logged in. Cannot add to cart.");
+      }
+    },
   },
 
   getters: {

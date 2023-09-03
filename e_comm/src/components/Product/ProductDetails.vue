@@ -28,18 +28,15 @@
             <li>Lorem ipsum dolor sit amet consectetur adipisicing</li>
           </ul>
         </div>
-              <!-- buttons for wishlist -->
-      <div
-        class="card-footer d-flex justify-content-between"
-        v-if="$route.name === 'ProductDetails'"
-      >
-        <button class="btn btn-primary" v-on:click="AddToCart()">
-          Add to cart
-        </button>
-        <button class="btn btn-danger" v-on:click="DeleteProductFromWishList()">
-          Remove
-        </button>
-      </div>
+        <!-- buttons for wishlist -->
+        <div
+          class="card-footer d-flex justify-content-between"
+          v-if="$route.name === 'ProductDetails'"
+        >
+          <button class="btn btn-primary" v-on:click="AddToCart()">
+            Add to cart
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -62,6 +59,7 @@ export default {
     ...mapGetters({
       allproducts: "allproducts", // Replace with your actual getter name
       allCategories: "allCategories", // Replace with your actual getter name
+      currentUser: "currentUser",
     }),
   },
 
@@ -92,10 +90,19 @@ export default {
       }
     },
     AddToCart() {
-      console.log("Added");
-    },
-    DeleteProductFromWishList() {
-      console.log("removed");
+      const productId = parseInt(this.$route.params.id.toString());
+      // Find the product with the given ID in your list of all products
+      const productToAdd = this.allproducts.find(
+        (product) => product.id === productId
+      );
+      // Check if the product exists before adding it to the cart
+      if (productToAdd) {
+        // Dispatch an action to add the product to the cart in your Vuex store
+        store.dispatch("addToCart", productToAdd);
+
+      } else {
+        console.error("Product not found");
+      }
     },
   },
 };

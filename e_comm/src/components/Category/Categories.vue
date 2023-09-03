@@ -31,7 +31,6 @@ export default defineComponent({
   },
   mounted() {
     // Access and print the data from the allCategories getter
-    console.log(this.allCategories);
   },
   components: {
     Categorybox,

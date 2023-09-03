@@ -53,7 +53,6 @@ export default {
     async fetchData() {
       try {
         this.Products = this.currentUser[0].cart
-        console.log(this.Products);
       } catch (error) {
         console.log(error);
       }

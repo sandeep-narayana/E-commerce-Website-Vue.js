@@ -31,9 +31,5 @@ export default {
   computed:{
     ...mapGetters(['allproducts'])
   },
-
-  mounted(){
-    console.log("I am in Product.vue")
-  }
 };
 </script>

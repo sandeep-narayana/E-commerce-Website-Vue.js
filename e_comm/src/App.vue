@@ -14,7 +14,6 @@ export default defineComponent({
     Navbar,
   },
   async mounted() {
-    console.log("I am in App.vue");
     // load all categories
     await store.dispatch("getAllCategories");
     // load all products
